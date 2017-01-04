@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.mobiledevs.eventreminder.EventReminderMain;
+import com.mobiledevs.eventreminder.R;
 
 /**
  * @author Joseph Thweatt   jathweat@asu.edu
@@ -14,6 +15,12 @@ import com.mobiledevs.eventreminder.EventReminderMain;
  */
 
 public class APIRequest extends AsyncTask<String, Integer, String> {
+
+    // API values
+    private static final String tmURL = "https://app.ticketmaster.com/";
+    private static final String apiType = "discovery";
+    private static final String version = "v2";
+    private static String apiKey;
 
     private AsyncTaskResult resultClass;
     private String searchQuery;
@@ -38,6 +45,8 @@ public class APIRequest extends AsyncTask<String, Integer, String> {
     @Override
     protected String doInBackground(String... params) {
         // format the search query to be used in a URL
+        searchQuery.trim();
+
 
         return null;
     }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Create a file called private_strings.html and copy these values into it.
+            Add private_strings.xml into your gitignore. This way, your private
+            api information will not be displayed on github
+
+    <string name="api_key"></string>
+
+                                                                                    -->
+</resources>
