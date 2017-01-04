@@ -1,5 +1,6 @@
 package com.mobiledevs.eventreminder;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mobiledevs.eventreminder.APIUtils.AsyncTaskResult;
@@ -16,9 +17,16 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
 
 
 
-    // from AsyncTaskResult
+    // AsyncTaskResult methods
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
     @Override
     public void onFinish(String output) {
 
     }
+
 }

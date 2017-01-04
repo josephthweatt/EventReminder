@@ -1,5 +1,6 @@
 package com.mobiledevs.eventreminder;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -57,7 +58,12 @@ public class EventReminderMain extends AppCompatActivity implements AsyncTaskRes
         }
     }
 
-    // from AsyncTaskResult
+    // AsyncTaskResult methods
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
     @Override
     public void onFinish(String output) {
 

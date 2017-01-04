@@ -1,5 +1,8 @@
 package com.mobiledevs.eventreminder.APIUtils;
 
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+
 /**
  * @author Joseph Thweatt   jathweat@asu.edu
  *
@@ -11,5 +14,7 @@ package com.mobiledevs.eventreminder.APIUtils;
 
 public interface AsyncTaskResult {
 
+    Context getContext();
     void onFinish(String output);
+
 }
