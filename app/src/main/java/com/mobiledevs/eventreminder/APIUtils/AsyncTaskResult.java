@@ -3,6 +3,8 @@ package com.mobiledevs.eventreminder.APIUtils;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
+import org.json.JSONObject;
+
 /**
  * @author Joseph Thweatt   jathweat@asu.edu
  *
@@ -15,6 +17,5 @@ import android.support.v7.app.AppCompatActivity;
 public interface AsyncTaskResult {
 
     Context getContext();
-    void onFinish(String output);
-
+    void onFinish(JSONObject object);
 }

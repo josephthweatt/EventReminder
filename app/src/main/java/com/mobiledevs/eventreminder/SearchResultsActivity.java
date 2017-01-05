@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.mobiledevs.eventreminder.APIUtils.AsyncTaskResult;
 
+import org.json.JSONObject;
+
 /**
  * @author Joseph Thweatt   jathweat@asu.edu
  *
@@ -25,7 +27,7 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
     }
 
     @Override
-    public void onFinish(String output) {
+    public void onFinish(JSONObject object) {
 
     }
 
