@@ -16,9 +16,10 @@ import org.json.JSONObject;
 
 public interface AsyncTaskResult {
 
-    // this is the name of the file that will store data across the application
+    // variable names for SharedPreferences
+    public static final String SEARCH_QUERY = "search_query";
     public static final String JSON_RESULT_STRING = "json_result";
 
     Context getContext();
-    void onFinish(String json);
+    void onFinish(String searchQuery, String json);
 }

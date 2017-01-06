@@ -66,13 +66,14 @@ public class EventReminderMain extends AppCompatActivity implements AsyncTaskRes
     }
 
     @Override
-    public void onFinish(String json) {
+    public void onFinish(String searchQuery, String json) {
 
         // if we have a JSON string without errors, we jump to
         // SearchResultsActivity to display those results
         if (json !=  null) {
 
             Intent intent = new Intent(this, SearchResultsActivity.class);
+            intent.putExtra(SEARCH_QUERY, searchQuery);
             intent.putExtra(JSON_RESULT_STRING, json);
             startActivity(intent);
         }

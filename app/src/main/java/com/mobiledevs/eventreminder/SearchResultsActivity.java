@@ -3,6 +3,8 @@ package com.mobiledevs.eventreminder;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.mobiledevs.eventreminder.APIUtils.AsyncTaskResult;
 
@@ -21,24 +23,46 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
 
     private JSONObject jsonObject;
 
+    TextView resultsHeader;
+    ListView eventList;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_results_activity);
 
+         String headerString;
+
         // create JSONObject
         Bundle bundle = getIntent().getExtras();
-
         if (bundle != null && bundle.getString(JSON_RESULT_STRING) != null) {
 
-            String resultString = bundle.getString(JSON_RESULT_STRING);
-            try {
-                jsonObject = new JSONObject(resultString);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            String jsonString = bundle.getString(JSON_RESULT_STRING);
+            createEventList(jsonString);
+            headerString = "Showing results for " + bundle.getString(SEARCH_QUERY);
+        } else {
+
+            headerString = "Sorry! No results were found";
         }
+
+        resultsHeader = (TextView) findViewById(R.id.results_header);
+        resultsHeader.setText(headerString);
+    }
+
+    private void createEventList(String jsonString) {
+
+        try {
+            jsonObject = new JSONObject(jsonString);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // parse jsonObject to get the events, then put them in a object of their own
+
+        // add array of event objects to ListView
+
+
     }
 
 
@@ -49,7 +73,7 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
     }
 
     @Override
-    public void onFinish(String json) {
+    public void onFinish(String searchQuery, String json) {
 
     }
 

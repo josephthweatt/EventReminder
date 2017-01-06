@@ -130,7 +130,7 @@ public class APIRequest extends AsyncTask<String, Integer, String> {
 
     @Override
     protected void onPostExecute(String json) {
-        resultClass.onFinish(json);
+        resultClass.onFinish(searchQuery, json);
     }
 
 }
