@@ -27,8 +27,9 @@ import java.net.URLEncoder;
 
 public class APIRequest extends AsyncTask<String, Integer, String> {
 
-    // API values
+    // API values (API will only grab values from Arizona, to reduce information overload)
     private static final String TM_ROOT_URL = "https://app.ticketmaster.com/discovery/v2/events.json?";
+    private static final String STATE_CODE = "&stateCode=AZ";
     private static String apiKey;
 
     private AsyncTaskResult resultClass;
@@ -38,7 +39,7 @@ public class APIRequest extends AsyncTask<String, Integer, String> {
 
     public APIRequest(AsyncTaskResult resultClass, String searchQuery) {
         this.resultClass = resultClass;
-        this.searchQuery = searchQuery;
+        this.searchQuery = searchQuery.trim();
     }
 
     @Override
@@ -67,7 +68,6 @@ public class APIRequest extends AsyncTask<String, Integer, String> {
         if (ContextCompat.checkSelfPermission(
                 resultClass.getContext(), android.Manifest.permission.INTERNET)
                 != PackageManager.PERMISSION_GRANTED) {
-            dialog.setMessage("Event Reminder does not have internet permissions");
             return null;
         }
 
@@ -84,10 +84,9 @@ public class APIRequest extends AsyncTask<String, Integer, String> {
         try {
 
             // format the search query to be used in a URL
-            searchQuery = searchQuery.trim();
             encodedSearch = URLEncoder.encode(searchQuery, "UTF-8");
 
-            urlString = TM_ROOT_URL +"apikey="+ apiKey +"&keyword="+ encodedSearch;
+            urlString = TM_ROOT_URL +"apikey="+ apiKey +"&keyword="+ encodedSearch + STATE_CODE;
             url = new URL(urlString);
             connection = (HttpURLConnection) url.openConnection();
             connection.connect();
