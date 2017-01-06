@@ -2,23 +2,20 @@ package com.mobiledevs.eventreminder.APIUtils;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.support.v4.content.ContextCompat;
 
-import com.mobiledevs.eventreminder.EventReminderMain;
 import com.mobiledevs.eventreminder.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 
 /**
@@ -61,9 +58,19 @@ public class APIRequest extends AsyncTask<String, Integer, JSONObject> {
      * @param params
      *
      * @return jsonObject - holds search results from TicketMaster API
+     * @return null if results were not returned
      */
     @Override
     protected JSONObject doInBackground(String... params) {
+
+        // check if the app has access to the internet
+        if (ContextCompat.checkSelfPermission(
+                resultClass.getContext(), android.Manifest.permission.INTERNET)
+                != PackageManager.PERMISSION_GRANTED) {
+            dialog.setMessage("Event Reminder does not have internet permissions");
+            return null;
+        }
+
         String resultString = null;
         JSONObject jsonObject = null;
 

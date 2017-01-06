@@ -48,13 +48,12 @@ public class EventReminderMain extends AppCompatActivity implements AsyncTaskRes
 
         switch (v.getId()) {
             case R.id.search:
-
                 String searchQuery = searchBar.getText().toString();
                 APIRequest request = new APIRequest(this, searchQuery);
                 request.execute();
                 break;
-            case R.id.saved_events:
 
+            case R.id.saved_events:
                 Intent intent = new Intent(this, SavedResultsActivity.class);
                 startActivity(intent);
                 break;
