@@ -25,7 +25,7 @@ import java.net.URLEncoder;
  * result in the form of a String
  */
 
-public class APIRequest extends AsyncTask<String, Integer, JSONObject> {
+public class APIRequest extends AsyncTask<String, Integer, String> {
 
     // API values
     private static final String TM_ROOT_URL = "https://app.ticketmaster.com/discovery/v2/events.json?";
@@ -61,7 +61,7 @@ public class APIRequest extends AsyncTask<String, Integer, JSONObject> {
      * @return null if results were not returned
      */
     @Override
-    protected JSONObject doInBackground(String... params) {
+    protected String doInBackground(String... params) {
 
         // check if the app has access to the internet
         if (ContextCompat.checkSelfPermission(
@@ -72,7 +72,6 @@ public class APIRequest extends AsyncTask<String, Integer, JSONObject> {
         }
 
         String resultString = null;
-        JSONObject jsonObject = null;
 
         String encodedSearch;
         String urlString;
@@ -80,7 +79,7 @@ public class APIRequest extends AsyncTask<String, Integer, JSONObject> {
 
         HttpURLConnection connection = null;
         InputStreamReader stream;
-        BufferedReader buffer = null;
+        BufferedReader buffer;
 
         try {
 
@@ -126,25 +125,12 @@ public class APIRequest extends AsyncTask<String, Integer, JSONObject> {
             }
         }
 
-
-        // create JSONObject
-        if (resultString != null) {
-            try {
-                jsonObject = new JSONObject(resultString);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-        return jsonObject;
+        return resultString;
     }
 
     @Override
-    protected void onPostExecute(JSONObject result) {
-        dialog.hide();
-
-        // TODO: call onFinish with the output
+    protected void onPostExecute(String json) {
+        resultClass.onFinish(json);
     }
 
 }

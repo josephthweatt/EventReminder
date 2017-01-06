@@ -2,6 +2,7 @@ package com.mobiledevs.eventreminder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,7 +36,9 @@ public class EventReminderMain extends AppCompatActivity implements AsyncTaskRes
 
         searchBar = (EditText) findViewById(R.id.search_bar);
         search = (Button) findViewById(R.id.search);
+        search.setOnClickListener(this);
         savedEvents = (Button) findViewById(R.id.saved_events);
+        savedEvents.setOnClickListener(this);
         madeBy = (TextView) findViewById(R.id.made_by);
 
         String author = "Made by " + getResources().getString(R.string.author);
@@ -67,13 +70,14 @@ public class EventReminderMain extends AppCompatActivity implements AsyncTaskRes
     }
 
     @Override
-    public void onFinish(JSONObject object) {
+    public void onFinish(String json) {
 
         // if we have a JSON string without errors, we jump to
         // SearchResultsActivity to display those results
-        if (object !=  null) {
+        if (json !=  null) {
+
             Intent intent = new Intent(this, SearchResultsActivity.class);
-            intent.putExtra("JSONObject", (Parcelable) object);
+            intent.putExtra(JSON_RESULT_STRING, json);
             startActivity(intent);
         }
     }

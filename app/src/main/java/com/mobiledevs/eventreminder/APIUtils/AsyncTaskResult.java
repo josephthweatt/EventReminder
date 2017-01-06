@@ -16,6 +16,9 @@ import org.json.JSONObject;
 
 public interface AsyncTaskResult {
 
+    // this is the name of the file that will store data across the application
+    public static final String JSON_RESULT_STRING = "json_result";
+
     Context getContext();
-    void onFinish(JSONObject object);
+    void onFinish(String json);
 }
