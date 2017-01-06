@@ -2,8 +2,6 @@ package com.mobiledevs.eventreminder;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,8 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mobiledevs.eventreminder.APIUtils.*;
-
-import org.json.JSONObject;
 
 /**
  * @author Joseph Thweatt   jathweat@asu.edu
@@ -32,7 +28,7 @@ public class EventReminderMain extends AppCompatActivity implements AsyncTaskRes
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_even_reminder_main);
+        setContentView(R.layout.event_reminder_main);
 
         searchBar = (EditText) findViewById(R.id.search_bar);
         search = (Button) findViewById(R.id.search);
