@@ -2,8 +2,6 @@ package com.mobiledevs.eventreminder;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.mobiledevs.eventreminder.APIUtils.AsyncTaskResult;
@@ -26,6 +24,8 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.search_results_activity);
 
         // create JSONObject
         Bundle bundle = getIntent().getExtras();
