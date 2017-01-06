@@ -30,13 +30,13 @@
         android:orientation="vertical"
         android:gravity="center_vertical">
 
-        <!-- TODO: Define these views -->
         <EditText
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="3dp"
-            android:background="@color/white" />
+            android:background="@color/white"
+            android:hint="@string/search_hint"/>
 
         <LinearLayout
             android:orientation="horizontal"
