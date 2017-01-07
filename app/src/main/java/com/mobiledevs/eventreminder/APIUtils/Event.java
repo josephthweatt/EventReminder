@@ -62,26 +62,56 @@ public class Event {
     }
 
     public String getName() {
+
+        if (name == null) {
+            name = "";
+        }
+
         return name;
     }
 
     public String getUrl() {
+
+        if (url == null) {
+            url = "";
+        }
+
         return url;
     }
 
     public String getDate() {
+
+        if (date == null) {
+            date = "";
+        }
+
         return date;
     }
 
     public String getStartTime() {
+
+        if (startTime == null) {
+            startTime = "";
+        }
+
         return startTime;
     }
 
     public String getVenueName() {
+
+        if (venueName == null) {
+            venueName = "";
+        }
+
         return venueName;
     }
 
     public String getPriceRange() {
+
+        if (priceRange == null) {
+            priceRange = "";
+        }
+
         return priceRange;
     }
 }
