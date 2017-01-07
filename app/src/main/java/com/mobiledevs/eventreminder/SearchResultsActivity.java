@@ -7,13 +7,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.mobiledevs.eventreminder.APIUtils.AsyncTaskResult;
+import com.mobiledevs.eventreminder.APIUtils.Event;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * @author Joseph Thweatt   jathweat@asu.edu
@@ -29,7 +29,7 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
     private ArrayList<Event> eventList;
 
     TextView resultsHeader;
-    ListView eventList;
+    ListView eventListView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,7 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
 
                 // parse jsonArray to get the events, then put them in a object of their own
                 for (int o = 0; o < jsonArray.length(); o++) {
-                    JSONObject eventObject = jsonArray.get(o);
+                    JSONObject eventObject = (JSONObject) jsonArray.get(o);
                     Event event = new Event(eventObject);
                     eventList.add(event);
                 }
