@@ -42,7 +42,7 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_results_activity);
 
-         String headerString;
+        String headerString = null;
 
         // create JSONObject
         Bundle bundle = getIntent().getExtras();
@@ -50,11 +50,15 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
 
             String jsonString = bundle.getString(JSON_RESULT_STRING);
             createEventList(jsonString);
-            headerString = "Showing results for " + bundle.getString(SEARCH_QUERY);
-        } else {
-            headerString = "Sorry! No results were found";
+            
+            if (eventList.size() > 0) {
+                headerString = "Showing results for " + bundle.getString(SEARCH_QUERY);
+            }
         }
 
+        if (headerString == null) {
+            headerString = "Sorry! No results were found";
+        }
         resultsHeader = (TextView) findViewById(R.id.results_header);
         resultsHeader.setText(headerString);
     }
