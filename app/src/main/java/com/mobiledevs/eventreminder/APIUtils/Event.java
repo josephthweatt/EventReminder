@@ -8,7 +8,11 @@ import org.json.JSONObject;
  * @author Joseph Thweatt   jathweat@asu.edu
  *
  * Event holds data pertaining to the event. It is used
- * with activities to help present data
+ * with activities to help present data. To learn about the
+ * structure of TicketMasters Discovery API (the one we are
+ * using), you can visit:
+ *
+ * http://developer.ticketmaster.com/products-and-docs/apis/discovery/v2/
  */
 
 public class Event {

@@ -30,7 +30,6 @@ import java.util.ArrayList;
 
 public class SearchResultsActivity extends AppCompatActivity  implements AsyncTaskResult {
 
-    private JSONObject jsonObject;
     private ArrayList<Event> eventList;
 
     TextView resultsHeader;
@@ -46,11 +45,12 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
 
         // create JSONObject
         Bundle bundle = getIntent().getExtras();
+
         if (bundle != null && bundle.getString(JSON_RESULT_STRING) != null) {
 
             String jsonString = bundle.getString(JSON_RESULT_STRING);
             createEventList(jsonString);
-            
+
             if (eventList.size() > 0) {
                 headerString = "Showing results for " + bundle.getString(SEARCH_QUERY);
             }
@@ -67,7 +67,7 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
         eventList = new ArrayList<Event>();
 
         try {
-            jsonObject = new JSONObject(jsonString);
+            JSONObject jsonObject = new JSONObject(jsonString);
 
             if (jsonObject.has("_embedded")
                     && jsonObject.getJSONObject("_embedded").has("events")) {
