@@ -1,8 +1,13 @@
 package com.mobiledevs.eventreminder;
 
 import android.content.Context;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -47,7 +52,6 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
             createEventList(jsonString);
             headerString = "Showing results for " + bundle.getString(SEARCH_QUERY);
         } else {
-
             headerString = "Sorry! No results were found";
         }
 
@@ -78,9 +82,16 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
             e.printStackTrace();
         }
 
-        // add array of event objects to ListView
+        // add array of event objects to ListView. You can learn more about
+        // how to make a ListView at:
+        // http://windrealm.org/tutorials/android/android-listview.php
+        if (eventList.size() > 0) {
+            ArrayAdapter<Event> adapter
+                    = new ArrayAdapter<Event>(this, R.layout.event_layout, eventList);
 
-
+            eventListView = (ListView) findViewById(R.id.event_list_view);
+            eventListView.setAdapter(adapter);
+        }
     }
 
 
