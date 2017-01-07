@@ -8,9 +8,6 @@ import android.support.v4.content.ContextCompat;
 
 import com.mobiledevs.eventreminder.R;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

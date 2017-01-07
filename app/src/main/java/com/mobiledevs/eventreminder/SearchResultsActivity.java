@@ -8,8 +8,12 @@ import android.widget.TextView;
 
 import com.mobiledevs.eventreminder.APIUtils.AsyncTaskResult;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * @author Joseph Thweatt   jathweat@asu.edu
@@ -22,6 +26,7 @@ import org.json.JSONObject;
 public class SearchResultsActivity extends AppCompatActivity  implements AsyncTaskResult {
 
     private JSONObject jsonObject;
+    private JSONArray jsonArray;
 
     TextView resultsHeader;
     ListView eventList;
@@ -54,14 +59,22 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
 
         try {
             jsonObject = new JSONObject(jsonString);
-        } catch (JSONException e) {
+
+            if (jsonObject.has("_embedded")
+                    && ((JSONObject) jsonObject.get("_embedded")).has("events")) {
+
+                JSONObject embedded = (JSONObject) jsonObject.get("_embedded");
+                jsonArray = (JSONArray) embedded.get("events");
+            }
+
+            // parse jsonArray to get the events, then put them in a object of their own
+
+
+        } catch (ClassCastException | JSONException e) {
             e.printStackTrace();
         }
 
-        // parse jsonObject to get the events, then put them in a object of their own
-
         // add array of event objects to ListView
-
 
     }
 
