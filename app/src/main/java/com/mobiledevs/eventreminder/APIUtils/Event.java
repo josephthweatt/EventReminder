@@ -33,23 +33,23 @@ public class Event {
     public void setEvent(JSONObject jsonObject) {
 
         try {
-            this.name = (String) jsonObject.get("name");
-            this.url = (String) jsonObject.get("url");
+            this.name = jsonObject.getString("name");
+            this.url = jsonObject.getString("url");
 
             // get date and startTime
-            JSONObject dates = (JSONObject) jsonObject.get("dates");
-            JSONObject start = (JSONObject) dates.get("start");
+            JSONObject dates = jsonObject.getJSONObject("dates");
+            JSONObject start = dates.getJSONObject("start");
             this.date = start.getString("localDate");
             this.startTime = start.getString("localTime");
 
             // get venue name
-            JSONObject _embedded = (JSONObject) jsonObject.get("_embedded");
-            JSONArray venues = (JSONArray) _embedded.get("venues");
-            this.venueName = ((JSONObject) venues.get(0)).getString("name");
+            JSONObject _embedded = jsonObject.getJSONObject("_embedded");
+            JSONArray venues = _embedded.getJSONArray("venues");
+            this.venueName = venues.getJSONObject(0).getString("name");
 
             // get priceRange
-            JSONArray priceRanges = (JSONArray) jsonObject.get("priceRanges");
-            JSONObject prObject = (JSONObject) priceRanges.get(0);
+            JSONArray priceRanges = jsonObject.getJSONArray("priceRanges");
+            JSONObject prObject = priceRanges.getJSONObject(0);
             this.priceRange = "$"+ prObject.getInt("min") +" - $"+ prObject.getInt("max");
 
         } catch (JSONException e) {

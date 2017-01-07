@@ -62,19 +62,19 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
             jsonObject = new JSONObject(jsonString);
 
             if (jsonObject.has("_embedded")
-                    && ((JSONObject) jsonObject.get("_embedded")).has("events")) {
+                    && jsonObject.getJSONObject("_embedded").has("events")) {
 
-                JSONObject embedded = (JSONObject) jsonObject.get("_embedded");
-                JSONArray jsonArray = (JSONArray) embedded.get("events");
+                JSONObject embedded = jsonObject.getJSONObject("_embedded");
+                JSONArray jsonArray = embedded.getJSONArray("events");
 
                 // parse jsonArray to get the events, then put them in a object of their own
                 for (int o = 0; o < jsonArray.length(); o++) {
-                    JSONObject eventObject = (JSONObject) jsonArray.get(o);
+                    JSONObject eventObject = jsonArray.getJSONObject(o);
                     Event event = new Event(eventObject);
                     eventList.add(event);
                 }
             }
-        } catch (ClassCastException | JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
