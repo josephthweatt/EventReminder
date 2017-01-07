@@ -1,13 +1,9 @@
 package com.mobiledevs.eventreminder;
 
 import android.content.Context;
-import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -91,7 +87,7 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
         // http://windrealm.org/tutorials/android/android-listview.php
         if (eventList.size() > 0) {
             ArrayAdapter<Event> adapter
-                    = new ArrayAdapter<Event>(this, R.layout.event_layout, eventList);
+                    = new ArrayAdapter<Event>(this, R.layout.event_list_item_layout, eventList);
 
             eventListView = (ListView) findViewById(R.id.event_list_view);
             eventListView.setAdapter(adapter);
