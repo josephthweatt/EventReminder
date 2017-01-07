@@ -26,7 +26,7 @@ import java.util.Iterator;
 public class SearchResultsActivity extends AppCompatActivity  implements AsyncTaskResult {
 
     private JSONObject jsonObject;
-    private JSONArray jsonArray;
+    private ArrayList<Event> eventList;
 
     TextView resultsHeader;
     ListView eventList;
@@ -56,6 +56,7 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
     }
 
     private void createEventList(String jsonString) {
+        eventList = new ArrayList<Event>();
 
         try {
             jsonObject = new JSONObject(jsonString);
@@ -64,12 +65,15 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
                     && ((JSONObject) jsonObject.get("_embedded")).has("events")) {
 
                 JSONObject embedded = (JSONObject) jsonObject.get("_embedded");
-                jsonArray = (JSONArray) embedded.get("events");
+                JSONArray jsonArray = (JSONArray) embedded.get("events");
+
+                // parse jsonArray to get the events, then put them in a object of their own
+                for (int o = 0; o < jsonArray.length(); o++) {
+                    JSONObject eventObject = jsonArray.get(o);
+                    Event event = new Event(eventObject);
+                    eventList.add(event);
+                }
             }
-
-            // parse jsonArray to get the events, then put them in a object of their own
-
-
         } catch (ClassCastException | JSONException e) {
             e.printStackTrace();
         }
