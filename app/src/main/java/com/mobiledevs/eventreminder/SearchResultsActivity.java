@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.mobiledevs.eventreminder.APIUtils.AsyncTaskResult;
 import com.mobiledevs.eventreminder.APIUtils.Event;
+import com.mobiledevs.eventreminder.APIUtils.EventAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -77,6 +78,7 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
                     Event event = new Event(eventObject);
                     eventList.add(event);
                 }
+
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -86,8 +88,9 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
         // how to make a ListView at:
         // http://windrealm.org/tutorials/android/android-listview.php
         if (eventList.size() > 0) {
-            ArrayAdapter<Event> adapter
-                    = new ArrayAdapter<Event>(this, R.layout.event_list_item_layout, eventList);
+
+            EventAdapter adapter
+                    = new EventAdapter(this, R.layout.event_list_item_layout, eventList);
 
             eventListView = (ListView) findViewById(R.id.event_list_view);
             eventListView.setAdapter(adapter);

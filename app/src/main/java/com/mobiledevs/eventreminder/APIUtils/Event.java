@@ -65,8 +65,12 @@ public class Event {
         return name;
     }
 
-    public String getUrl () {
+    public String getUrl() {
         return url;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public String getStartTime() {
