@@ -80,6 +80,7 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
 
         // add array of event objects to ListView
 
+
     }
 
 
