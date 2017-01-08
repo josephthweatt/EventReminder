@@ -35,7 +35,9 @@ public class Event {
      * the object.
      */
     public void setEvent(JSONObject jsonObject) {
-
+        // TODO: price Range seems to be throwing JSON Exception. Look into it.
+        // TODO: give each String assignment a JSONException, so that the variables
+        // TODO: can still be assigned even if one fails
         try {
             this.name = jsonObject.getString("name");
             this.url = jsonObject.getString("url");

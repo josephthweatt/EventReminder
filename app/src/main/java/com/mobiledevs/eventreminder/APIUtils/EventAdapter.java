@@ -24,7 +24,6 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
     public EventAdapter(Context context, int eventListItemId, ArrayList<Event> eventList) {
         super(context, eventListItemId, eventList);
-
     }
 
     @Override
@@ -33,22 +32,23 @@ public class EventAdapter extends ArrayAdapter<Event> {
         // get the data of the event at this position
         Event event = getItem(position);
 
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+
         if (convertView == null) {
 
-            convertView = LayoutInflater.from(getContext())
-                    .inflate(R.layout.event_list_item_layout, parent, false);
+            convertView = inflater.inflate(R.layout.event_list_item_layout, parent, false);
+
+            // get Textviews from event_list_item_layout
+            TextView name = (TextView) convertView.findViewById(R.id.event_list_name);
+            TextView priceRange = (TextView) convertView.findViewById(R.id.event_list_price_range);
+            TextView date = (TextView) convertView.findViewById(R.id.event_list_date);
+            TextView startTime = (TextView) convertView.findViewById(R.id.event_list_start_time);
+
+            name.setText(event.getName());
+            priceRange.setText(event.getPriceRange());
+            date.setText(event.getDate());
+            startTime.setText(event.getStartTime());
         }
-
-        // get Textviews from event_list_item_layout
-        TextView name = (TextView) convertView.findViewById(R.id.event_list_name);
-        TextView priceRange = (TextView) convertView.findViewById(R.id.event_list_price_range);
-        TextView date = (TextView) convertView.findViewById(R.id.event_list_date);
-        TextView startTime = (TextView) convertView.findViewById(R.id.event_list_start_time);
-
-        name.setText(event.getName());
-        priceRange.setText(event.getPriceRange());
-        date.setText(event.getDate());
-        startTime.setText(event.getStartTime());
 
         return convertView;
     }
