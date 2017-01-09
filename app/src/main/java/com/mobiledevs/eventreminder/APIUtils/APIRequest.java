@@ -44,9 +44,9 @@ public class APIRequest extends AsyncTask<String, Integer, String> {
         Context context = resultClass.getContext();
         apiKey = context.getResources().getString(R.string.api_key);
 
-        ProgressDialog dialog = new ProgressDialog(context);
+        dialog = new ProgressDialog(context);
         dialog.setMessage("Searching Events");
-        dialog.setCancelable(true);
+        dialog.setCancelable(false);
         dialog.setInverseBackgroundForced(false); // this was deprecated as of SDK 23
 
         dialog.show();
@@ -126,6 +126,10 @@ public class APIRequest extends AsyncTask<String, Integer, String> {
 
     @Override
     protected void onPostExecute(String json) {
+        if(dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+
         resultClass.onFinish(searchQuery, json);
     }
 
