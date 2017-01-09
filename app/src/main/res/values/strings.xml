@@ -3,7 +3,7 @@
     <string name="author">Your name here</string>
 
     <!-- view strings -->
-    <string name="search_hint">Enter The Name of a Performer or Event</string>
+    <string name="search_hint">Search Events</string>
     <string name="search">Search Events</string>
     <string name="saved">Saved Events</string>
 

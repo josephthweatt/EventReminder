@@ -49,7 +49,8 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
             createEventList(jsonString);
 
             if (eventList.size() > 0) {
-                headerString = "Showing results for " + bundle.getString(SEARCH_QUERY);
+                headerString = "Showing results for \""
+                        + bundle.getString(SEARCH_QUERY) +"\"";
             }
         }
 
