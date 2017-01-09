@@ -35,19 +35,11 @@ public class EventAdapter extends ArrayAdapter<Event> {
         LayoutInflater inflater = LayoutInflater.from(getContext());
 
         if (convertView == null) {
-
             convertView = inflater.inflate(R.layout.event_list_item_layout, parent, false);
 
             // get Textviews from event_list_item_layout
             TextView name = (TextView) convertView.findViewById(R.id.event_list_name);
-            TextView priceRange = (TextView) convertView.findViewById(R.id.event_list_price_range);
-            TextView date = (TextView) convertView.findViewById(R.id.event_list_date);
-            TextView startTime = (TextView) convertView.findViewById(R.id.event_list_start_time);
-
             name.setText(event.getName());
-            priceRange.setText(event.getPriceRange());
-            date.setText(event.getDate());
-            startTime.setText(event.getStartTime());
         }
 
         return convertView;
