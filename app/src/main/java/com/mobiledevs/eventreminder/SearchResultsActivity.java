@@ -99,7 +99,7 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
             eventListView = (ListView) findViewById(R.id.event_list_view);
             eventListView.setAdapter(adapter);
 
-            /*eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -111,7 +111,7 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
                     transaction.add(R.id.results_event_fragment, eventFragment);
                     transaction.commit();
                 }
-            });*/
+            });
         }
     }
 

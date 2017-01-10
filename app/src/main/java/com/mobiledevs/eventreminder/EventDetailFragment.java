@@ -18,30 +18,33 @@ import com.mobiledevs.eventreminder.APIUtils.Event;
 
 public class EventDetailFragment extends Fragment {
 
+    View eventView;
     Event event;
 
     public void setEvent (Event event) {
+        if (event == null) {
+            return;
+        }
+
         this.event = event;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (event == null) {
-            return null;
+        this.eventView = inflater.inflate(R.layout.results_event_fragment, container, false);
+
+        if (event != null) {
+            TextView name = (TextView) eventView.findViewById(R.id.event_list_name);
+            TextView priceRange = (TextView) eventView.findViewById(R.id.event_list_price_range);
+            TextView date = (TextView) eventView.findViewById(R.id.event_list_date);
+            TextView startTime = (TextView) eventView.findViewById(R.id.event_list_start_time);
+
+            name.setText(event.getName());
+            priceRange.setText(event.getPriceRange());
+            date.setText(event.getDate());
+            startTime.setText(event.getStartTime());
         }
-
-        View eventView = inflater.inflate(R.layout.results_event_fragment, container, false);
-
-        TextView name = (TextView) eventView.findViewById(R.id.event_list_name);
-        TextView priceRange = (TextView) eventView.findViewById(R.id.event_list_price_range);
-        TextView date = (TextView) eventView.findViewById(R.id.event_list_date);
-        TextView startTime = (TextView) eventView.findViewById(R.id.event_list_start_time);
-
-        name.setText(event.getName());
-        priceRange.setText(event.getPriceRange());
-        date.setText(event.getDate());
-        startTime.setText(event.getStartTime());
 
         return eventView;
     }
