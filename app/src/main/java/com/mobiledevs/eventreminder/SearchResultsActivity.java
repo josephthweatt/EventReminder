@@ -32,6 +32,7 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
 
     private ArrayList<Event> eventList;
 
+    EventDetailFragment eventFragment;
     TextView resultsHeader;
     ListView eventListView;
 
@@ -106,7 +107,11 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
                     FragmentManager manager = getSupportFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
 
-                    EventDetailFragment eventFragment = new EventDetailFragment();
+                    if (eventFragment != null) {
+                        transaction.remove(eventFragment);
+                    }
+
+                    eventFragment = new EventDetailFragment();
                     eventFragment.setEvent(eventList.get(position));
                     transaction.add(R.id.results_event_fragment, eventFragment);
                     transaction.commit();
