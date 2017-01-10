@@ -1,12 +1,63 @@
-
-<TextView
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/event_list_name"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/activity_vertical_margin"
-    android:layout_marginStart="@dimen/activity_horizontal_margin"
-    android:layout_marginEnd="@dimen/activity_horizontal_margin"
-    android:background="@color/white"
-    android:textColor="@color/black"
-    android:textSize="25sp" />
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:textAlignment="viewStart">
+
+        <TextView
+            android:id="@+id/event_list_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:textColor="@color/black"
+            android:textSize="28sp"/>
+
+        <TextView
+            android:id="@+id/event_list_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:textAlignment="viewEnd">
+
+        <TextView
+            android:id="@+id/event_list_price_range"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/event_list_start_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

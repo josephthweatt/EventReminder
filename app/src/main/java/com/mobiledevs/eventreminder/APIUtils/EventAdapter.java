@@ -1,12 +1,16 @@
 package com.mobiledevs.eventreminder.APIUtils;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.mobiledevs.eventreminder.EventDetailFragment;
 import com.mobiledevs.eventreminder.R;
 
 import java.util.ArrayList;
@@ -27,28 +31,27 @@ public class EventAdapter extends ArrayAdapter<Event> {
     }
 
     @Override
+    @NonNull
     public View getView(int position, View convertView, ViewGroup parent) {
-
         // get the data of the event at this position
         Event event = getItem(position);
 
         LayoutInflater inflater = LayoutInflater.from(getContext());
 
         if (convertView == null) {
+
             convertView = inflater.inflate(R.layout.event_list_item_layout, parent, false);
 
             // get Textviews from event_list_item_layout
             TextView name = (TextView) convertView.findViewById(R.id.event_list_name);
+            TextView priceRange = (TextView) convertView.findViewById(R.id.event_list_price_range);
+            TextView date = (TextView) convertView.findViewById(R.id.event_list_date);
+            TextView startTime = (TextView) convertView.findViewById(R.id.event_list_start_time);
+
             name.setText(event.getName());
-
-            // list items can be clicked to display details
-            name.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // TODO: launch fragment in this activity
-
-                }
-            });
+            priceRange.setText(event.getPriceRange());
+            date.setText(event.getDate());
+            startTime.setText(event.getStartTime());
         }
 
         return convertView;

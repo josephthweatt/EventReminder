@@ -2,8 +2,11 @@ package com.mobiledevs.eventreminder;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,7 +28,7 @@ import java.util.ArrayList;
  * add the events to their saved events
  */
 
-public class SearchResultsActivity extends AppCompatActivity  implements AsyncTaskResult {
+public class SearchResultsActivity extends FragmentActivity implements AsyncTaskResult {
 
     private ArrayList<Event> eventList;
 
@@ -95,6 +98,20 @@ public class SearchResultsActivity extends AppCompatActivity  implements AsyncTa
 
             eventListView = (ListView) findViewById(R.id.event_list_view);
             eventListView.setAdapter(adapter);
+
+            /*eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    FragmentManager manager = getSupportFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+
+                    EventDetailFragment eventFragment = new EventDetailFragment();
+                    eventFragment.setEvent(eventList.get(position));
+                    transaction.add(R.id.results_event_fragment, eventFragment);
+                    transaction.commit();
+                }
+            });*/
         }
     }
 

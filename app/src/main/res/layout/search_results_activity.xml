@@ -23,4 +23,11 @@
         android:background="@color/white"
         android:padding="7dp"/>
 
+    <!--
+    <fragment
+        android:name="com.mobiledevs.eventreminder.EventDetailFragment"
+        android:id="@+id/results_event_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    -->
 </LinearLayout>

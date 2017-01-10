@@ -49,7 +49,7 @@ public class EventReminderMain extends AppCompatActivity implements AsyncTaskRes
             case R.id.search:
                 String searchQuery = searchBar.getText().toString();
 
-                if (searchQuery.equals("")) {
+                if (!searchQuery.equals("")) {
                     APIRequest request = new APIRequest(this, searchQuery);
                     request.execute();
                 }
