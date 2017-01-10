@@ -8,7 +8,7 @@
     android:background="@color/white">
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical"
@@ -33,20 +33,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="horizontal"
         android:textAlignment="viewEnd">
-
-        <TextView
-            android:id="@+id/event_list_price_range"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="4dp"
-            android:textColor="@color/black"
-            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/event_list_start_time"
@@ -54,9 +45,19 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="4dp"
-            android:textAlignment="textEnd"
+            android:textAlignment="viewStart"
             android:textColor="@color/black"
             android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/event_list_price_range"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="4dp"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
     </LinearLayout>
 
