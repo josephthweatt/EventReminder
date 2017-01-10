@@ -36,28 +36,42 @@ public class Event {
      */
     public void setEvent(JSONObject jsonObject) {
         // TODO: price Range seems to be throwing JSON Exception. Look into it.
-        // TODO: give each String assignment a JSONException, so that the variables
-        // TODO: can still be assigned even if one fails
         try {
             this.name = jsonObject.getString("name");
-            this.url = jsonObject.getString("url");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-            // get date and startTime
+        try {
+            this.url = jsonObject.getString("url");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // get date and startTime
+        try {
             JSONObject dates = jsonObject.getJSONObject("dates");
             JSONObject start = dates.getJSONObject("start");
             this.date = start.getString("localDate");
             this.startTime = start.getString("localTime");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-            // get venue name
+        // get venue name
+        try {
             JSONObject _embedded = jsonObject.getJSONObject("_embedded");
             JSONArray venues = _embedded.getJSONArray("venues");
             this.venueName = venues.getJSONObject(0).getString("name");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-            // get priceRange
+        // get priceRange
+        try{
             JSONArray priceRanges = jsonObject.getJSONArray("priceRanges");
             JSONObject prObject = priceRanges.getJSONObject(0);
             this.priceRange = "$"+ prObject.getInt("min") +" - $"+ prObject.getInt("max");
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

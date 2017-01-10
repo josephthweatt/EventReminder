@@ -46,7 +46,7 @@ public class EventAdapter extends ArrayAdapter<Event> {
                 @Override
                 public void onClick(View v) {
                     // TODO: launch fragment in this activity
-                    
+
                 }
             });
         }
