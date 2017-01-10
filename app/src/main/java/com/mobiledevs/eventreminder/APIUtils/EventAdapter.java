@@ -40,6 +40,15 @@ public class EventAdapter extends ArrayAdapter<Event> {
             // get Textviews from event_list_item_layout
             TextView name = (TextView) convertView.findViewById(R.id.event_list_name);
             name.setText(event.getName());
+
+            // list items can be clicked to display details
+            name.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TODO: launch fragment in this activity
+                    
+                }
+            });
         }
 
         return convertView;

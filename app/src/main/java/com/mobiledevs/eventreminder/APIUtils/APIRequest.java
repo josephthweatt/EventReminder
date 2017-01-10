@@ -126,7 +126,7 @@ public class APIRequest extends AsyncTask<String, Integer, String> {
 
     @Override
     protected void onPostExecute(String json) {
-        if(dialog != null && dialog.isShowing()) {
+        if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
         }
 
