@@ -33,6 +33,7 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
     private ArrayList<Event> eventList;
 
     EventDetailFragment eventFragment;
+    View fragmentView;
     TextView resultsHeader;
     ListView eventListView;
 
@@ -63,6 +64,10 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
         }
         resultsHeader = (TextView) findViewById(R.id.results_header);
         resultsHeader.setText(headerString);
+
+        // hide fragment until clicked
+        fragmentView = findViewById(R.id.results_event_fragment);
+        fragmentView.setVisibility(View.INVISIBLE);
     }
 
     private void createEventList(String jsonString) {
@@ -104,9 +109,13 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
 
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    if (fragmentView.getVisibility() == View.INVISIBLE) {
+                        fragmentView.setVisibility(View.VISIBLE);
+                    }
+
                     FragmentManager manager = getSupportFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
-
                     if (eventFragment != null) {
                         transaction.remove(eventFragment);
                     }

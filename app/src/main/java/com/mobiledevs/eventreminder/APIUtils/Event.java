@@ -49,7 +49,6 @@ public class Event {
             this.name = jsonObject.getString("name");
         } catch (JSONException e) {
             Log.i(TAG, "name not found");
-
         }
 
         try {
@@ -78,7 +77,7 @@ public class Event {
         }
 
         // get priceRange
-        try{
+        try {
             JSONArray priceRanges = jsonObject.getJSONArray("priceRanges");
             JSONObject prObject = priceRanges.getJSONObject(0);
             this.priceRange = "$"+ prObject.getInt("min") +" - $"+ prObject.getInt("max");
