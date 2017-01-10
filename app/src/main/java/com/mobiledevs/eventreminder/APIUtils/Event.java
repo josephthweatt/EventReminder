@@ -1,5 +1,7 @@
 package com.mobiledevs.eventreminder.APIUtils;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,6 +19,8 @@ import org.json.JSONObject;
 
 public class Event {
 
+    public static final String TAG = "APIUtils.Event";
+
     // event data
     private String name;
     private String url;
@@ -33,19 +37,25 @@ public class Event {
      * This will set the event data according to the jsonObject
      * passed into it. This will overwrite the data already in
      * the object.
+     *
+     * @param jsonObject - JSON data taken from Ticketmaster's API output.
+     *                      Specifically, it is the JSONObject taken from
+     *                      the 'events' JSONArray in the '_embedded'
+     *                      JSONObject.
      */
     public void setEvent(JSONObject jsonObject) {
-        // TODO: price Range seems to be throwing JSON Exception. Look into it.
+
         try {
             this.name = jsonObject.getString("name");
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.i(TAG, "name not found");
+
         }
 
         try {
             this.url = jsonObject.getString("url");
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.i(TAG, "url not found");
         }
 
         // get date and startTime
@@ -55,7 +65,7 @@ public class Event {
             this.date = start.getString("localDate");
             this.startTime = start.getString("localTime");
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.i(TAG, "date and startTime not found");
         }
 
         // get venue name
@@ -64,7 +74,7 @@ public class Event {
             JSONArray venues = _embedded.getJSONArray("venues");
             this.venueName = venues.getJSONObject(0).getString("name");
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.i(TAG, "venueName not found");
         }
 
         // get priceRange
@@ -73,7 +83,7 @@ public class Event {
             JSONObject prObject = priceRanges.getJSONObject(0);
             this.priceRange = "$"+ prObject.getInt("min") +" - $"+ prObject.getInt("max");
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.i(TAG, "priceRange not found");
         }
     }
 
