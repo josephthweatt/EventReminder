@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
  * add the events to their saved events
  */
 
-public class SearchResultsActivity extends FragmentActivity implements AsyncTaskResult {
+public class SearchResultsActivity extends FragmentActivity implements AsyncTaskResult, View.OnClickListener{
 
     private ArrayList<Event> eventList;
 
@@ -70,6 +71,18 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
         fragmentView.setVisibility(View.INVISIBLE);
     }
 
+    @Override
+    public void onClick(View v) {
+
+        // clicking outside of the event details when they are
+        // brought up will close the view
+        if (fragmentView.getVisibility() == View.VISIBLE
+                && v.getId() != R.id.results_event_fragment) {
+            fragmentView.setVisibility(View.INVISIBLE);
+            freezeListView(false);
+        }
+    }
+
     private void createEventList(String jsonString) {
         eventList = new ArrayList<Event>();
 
@@ -106,29 +119,63 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
             eventListView.setAdapter(adapter);
 
             eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     if (fragmentView.getVisibility() == View.INVISIBLE) {
                         fragmentView.setVisibility(View.VISIBLE);
-                    }
+                        freezeListView(true);
 
-                    FragmentManager manager = getSupportFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
-                    if (eventFragment != null) {
-                        transaction.remove(eventFragment);
-                    }
+                        FragmentManager manager = getSupportFragmentManager();
+                        FragmentTransaction transaction = manager.beginTransaction();
+                        if (eventFragment != null) {
+                            transaction.remove(eventFragment);
+                        }
 
-                    eventFragment = new EventDetailFragment();
-                    eventFragment.setEvent(eventList.get(position));
-                    transaction.add(R.id.results_event_fragment, eventFragment);
-                    transaction.commit();
+                        eventFragment = new EventDetailFragment();
+                        eventFragment.setEvent(eventList.get(position));
+                        transaction.add(R.id.results_event_fragment, eventFragment);
+                        transaction.commit();
+                    } else if (fragmentView.getVisibility() == View.VISIBLE) {
+
+                    }
                 }
             });
         }
     }
 
+    private void freezeListView (Boolean freeze) {
+
+        if (freeze) {
+            // gray out the listview items
+            for (int i = 0; i < eventListView.getChildCount(); i++) {
+                // only set background of the visible items
+                if (eventListView.getChildAt(i) != null) {
+                    eventListView.getChildAt(i).setBackgroundColor(
+                            ContextCompat.getColor(getContext(), R.color.white_fade));
+                }
+            }
+
+            eventListView.setBackgroundColor(
+                    ContextCompat.getColor(getContext(), R.color.white_fade));
+            eventListView.setEnabled(false);
+
+        } else {
+            // restore listview
+            for (int i = 0; i < eventListView.getChildCount(); i++) {
+                // only set background of the visible items
+                if (eventListView.getChildAt(i) != null) {
+                    eventListView.getChildAt(i).setBackgroundColor(
+                            ContextCompat.getColor(getContext(), R.color.white));
+                }
+            }
+
+            eventListView.setBackgroundColor(
+                    ContextCompat.getColor(getContext(), R.color.white));
+            eventListView.setEnabled(true);
+
+        }
+    }
 
     // AsyncTaskResult methods
     @Override
