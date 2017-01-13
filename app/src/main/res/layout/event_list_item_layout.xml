@@ -14,6 +14,13 @@
         android:orientation="vertical"
         android:textAlignment="viewStart">
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="5dp"
+            android:src="@drawable/red_x"/>
+
         <TextView
             android:id="@+id/event_list_name"
             android:layout_width="wrap_content"
