@@ -42,6 +42,8 @@ public class EventAdapter extends ArrayAdapter<Event> {
 
             convertView = inflater.inflate(R.layout.event_list_item_layout, parent, false);
 
+            // set ImageButton to exit the
+
             // get Textviews from event_list_item_layout
             TextView name = (TextView) convertView.findViewById(R.id.event_list_name);
             TextView priceRange = (TextView) convertView.findViewById(R.id.event_list_price_range);
