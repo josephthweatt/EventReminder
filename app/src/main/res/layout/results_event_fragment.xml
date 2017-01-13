@@ -23,7 +23,7 @@
             android:src="@drawable/red_x" />
 
         <TextView
-            android:id="@+id/event_list_name"
+            android:id="@+id/event_fragment_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
@@ -31,7 +31,7 @@
             android:textSize="28sp"/>
 
         <TextView
-            android:id="@+id/event_list_date"
+            android:id="@+id/event_fragment_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
@@ -48,7 +48,7 @@
         android:textAlignment="viewEnd">
 
         <TextView
-            android:id="@+id/event_list_start_time"
+            android:id="@+id/event_fragment_start_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -58,7 +58,7 @@
             android:textSize="12sp"/>
 
         <TextView
-            android:id="@+id/event_list_price_range"
+            android:id="@+id/event_fragment_price_range"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -35,10 +35,10 @@ public class EventDetailFragment extends Fragment {
         this.eventView = inflater.inflate(R.layout.results_event_fragment, container, false);
 
         if (event != null) {
-            TextView name = (TextView) eventView.findViewById(R.id.event_list_name);
-            TextView priceRange = (TextView) eventView.findViewById(R.id.event_list_price_range);
-            TextView date = (TextView) eventView.findViewById(R.id.event_list_date);
-            TextView startTime = (TextView) eventView.findViewById(R.id.event_list_start_time);
+            TextView name = (TextView) eventView.findViewById(R.id.event_fragment_name);
+            TextView priceRange = (TextView) eventView.findViewById(R.id.event_fragment_price_range);
+            TextView date = (TextView) eventView.findViewById(R.id.event_fragment_date);
+            TextView startTime = (TextView) eventView.findViewById(R.id.event_fragment_start_time);
 
             name.setText(event.getName());
             priceRange.setText(event.getPriceRange());
