@@ -152,6 +152,13 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
         }
     }
 
+    /**
+     * Grays out the listview and makes it inactive, so that it looks like
+     * it has taken background to the event fragment
+     *
+     * @param freeze - true to put the ListView in the "backgorund", false
+     *                  to restore the ListView
+     */
     private void freezeListView (Boolean freeze) {
 
         if (freeze) {
