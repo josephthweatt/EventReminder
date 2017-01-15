@@ -161,35 +161,21 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
      */
     private void freezeListView (Boolean freeze) {
 
-        if (freeze) {
-            // gray out the listview items
-            for (int i = 0; i < eventListView.getChildCount(); i++) {
-                // only set background of the visible items
-                if (eventListView.getChildAt(i) != null) {
-                    eventListView.getChildAt(i).setBackgroundColor(
-                            ContextCompat.getColor(getContext(), R.color.white_fade));
-                }
+        int colorId = (freeze) ? R.color.white_fade : R.color.white;
+
+        // change color of listView items
+        for (int i = 0; i < eventListView.getChildCount(); i++) {
+
+            // only set background of the visible items
+            if (eventListView.getChildAt(i) != null) {
+                eventListView.getChildAt(i).setBackgroundColor(
+                        ContextCompat.getColor(getContext(), colorId));
             }
-
-            eventListView.setBackgroundColor(
-                    ContextCompat.getColor(getContext(), R.color.white_fade));
-            eventListView.setEnabled(false);
-
-        } else {
-            // restore listview
-            for (int i = 0; i < eventListView.getChildCount(); i++) {
-                // only set background of the visible items
-                if (eventListView.getChildAt(i) != null) {
-                    eventListView.getChildAt(i).setBackgroundColor(
-                            ContextCompat.getColor(getContext(), R.color.white));
-                }
-            }
-
-            eventListView.setBackgroundColor(
-                    ContextCompat.getColor(getContext(), R.color.white));
-            eventListView.setEnabled(true);
-
         }
+
+        eventListView.setBackgroundColor(
+                ContextCompat.getColor(getContext(), colorId));
+        eventListView.setEnabled(!freeze);
     }
 
     // AsyncTaskResult methods
