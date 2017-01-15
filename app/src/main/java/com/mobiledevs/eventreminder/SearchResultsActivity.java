@@ -118,12 +118,21 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
                     FragmentManager manager = getSupportFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
                     eventFragment = new EventDetailFragment();
-
-                    eventFragment.setEvent(eventListView, eventList.get(position));
+                    eventFragment.setFragment(getContext(), eventListView, eventList.get(position));
                     transaction.replace(R.id.results_event_fragment, eventFragment);
+
+                    // the user will be able to navigate back to the listview using the back button
+                    transaction.addToBackStack(null);
                     transaction.commit();
                 }
             });
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (eventFragment.fragmentOpen()) {
+            eventFragment.goBack();
         }
     }
 

@@ -24,11 +24,15 @@ import java.util.List;
 
 public class EventDetailFragment extends Fragment {
 
-    ListView eventListView;
+    private Boolean fragmentOpen = false;
+
+    Context context;
     Event event;
+    ListView eventListView;
     View eventView;
 
-    public void setEvent (ListView eventListView, Event event) {
+    public void setFragment(Context context, ListView eventListView, Event event) {
+        this.context = context;
         this.eventListView = eventListView;
         this.event = event;
     }
@@ -39,42 +43,54 @@ public class EventDetailFragment extends Fragment {
         this.eventView = inflater.inflate(R.layout.results_event_fragment, container, false);
 
         if (event != null) {
-            TextView name = (TextView) eventView.findViewById(R.id.event_fragment_name);
-            TextView priceRange = (TextView) eventView.findViewById(R.id.event_fragment_price_range);
-            TextView date = (TextView) eventView.findViewById(R.id.event_fragment_date);
-            TextView startTime = (TextView) eventView.findViewById(R.id.event_fragment_start_time);
-
-            name.setText(event.getName());
-            priceRange.setText(event.getPriceRange());
-            date.setText(event.getDate());
-            startTime.setText(event.getStartTime());
-
-            // set the image of an 'x' to exit the fragmentView
-            ImageButton fragmentExit = (ImageButton) eventView.findViewById(R.id.event_fragment_exit);
-            fragmentExit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    eventView.setVisibility(View.INVISIBLE);
-                    freezeListView(false);
-                }
-            });
-
-            freezeListView(true);
+            displayFragment(true);
         }
 
         return eventView;
     }
 
+    public Boolean fragmentOpen() {
+        return fragmentOpen;
+    }
+
     /**
-     * Grays out the listview and makes it inactive, so that it looks like
-     * it has taken background to the event fragment
+     * method called when a user wants to return to the origional view
+     */
+    public void goBack() {
+        displayFragment(false);
+        getActivity().getSupportFragmentManager().popBackStack();
+    }
+
+    /**
+     * Creates and displays the event in  a fragment. Also grays out
+     * the background
      *
-     * @param freeze - true to put the ListView in the "backgorund", false
+     * @param display - true to put the ListView in the "backgorund", false
      *                  to restore the ListView
      */
-    private void freezeListView (Boolean freeze) {
+    private void displayFragment (Boolean display) {
 
-        int colorId = (freeze) ? R.color.white_fade : R.color.white;
+        TextView name = (TextView) eventView.findViewById(R.id.event_fragment_name);
+        TextView priceRange = (TextView) eventView.findViewById(R.id.event_fragment_price_range);
+        TextView date = (TextView) eventView.findViewById(R.id.event_fragment_date);
+        TextView startTime = (TextView) eventView.findViewById(R.id.event_fragment_start_time);
+
+        name.setText(event.getName());
+        priceRange.setText(event.getPriceRange());
+        date.setText(event.getDate());
+        startTime.setText(event.getStartTime());
+
+        // set the image of an 'x' to exit the fragmentView
+        ImageButton fragmentExit = (ImageButton) eventView.findViewById(R.id.event_fragment_exit);
+        fragmentExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goBack();
+            }
+        });
+
+        int colorId = (display) ? R.color.white_fade : R.color.white;
+        fragmentOpen = display;
 
         // change color of listView items
         for (int i = 0; i < eventListView.getChildCount(); i++) {
@@ -82,13 +98,13 @@ public class EventDetailFragment extends Fragment {
             // only set background of the visible items
             if (eventListView.getChildAt(i) != null) {
                 eventListView.getChildAt(i).setBackgroundColor(
-                        ContextCompat.getColor(getContext(), colorId));
+                        ContextCompat.getColor(context, colorId));
             }
         }
 
         eventListView.setBackgroundColor(
-                ContextCompat.getColor(getContext(), colorId));
-        eventListView.setEnabled(!freeze);
+                ContextCompat.getColor(context, colorId));
+        eventListView.setEnabled(!display);
     }
 
 }
