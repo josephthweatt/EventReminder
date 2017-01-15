@@ -28,12 +28,10 @@
             android:background="@color/white"
             android:padding="7dp" />
 
-        <fragment
-            class="com.mobiledevs.eventreminder.EventDetailFragment"
+        <FrameLayout
             android:id="@+id/results_event_fragment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </FrameLayout>
 

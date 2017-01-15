@@ -67,21 +67,11 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
         resultsHeader = (TextView) findViewById(R.id.results_header);
         resultsHeader.setText(headerString);
 
-        // hide fragment until clicked
-        fragmentView = findViewById(R.id.results_event_fragment);
-        fragmentView.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void onClick(View v) {
 
-        // clicking outside of the event details when they are
-        // brought up will close the view
-        if (fragmentView.getVisibility() == View.VISIBLE
-                && v.getId() != R.id.results_event_fragment) {
-            fragmentView.setVisibility(View.INVISIBLE);
-            freezeListView(false);
-        }
     }
 
     private void createEventList(String jsonString) {
@@ -120,62 +110,21 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
             eventListView.setAdapter(adapter);
 
             eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                // this is the code that will be executed when a list item is clicked
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     FragmentManager manager = getSupportFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
-                    if (eventFragment != null) {
-                        transaction.remove(eventFragment);
-                    }
-
                     eventFragment = new EventDetailFragment();
-                    eventFragment.setEvent(eventList.get(position));
 
-                    // set the image of an 'x' to exit the fragmentView
-                    ImageButton fragmentExit = (ImageButton) findViewById(R.id.event_fragment_exit);
-                    fragmentExit.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            fragmentView.setVisibility(View.INVISIBLE);
-                            freezeListView(false);
-                        }
-                    });
-
-                    // make view visible and disable the background
-                    fragmentView.setVisibility(View.VISIBLE);
-                    freezeListView(true);
+                    eventFragment.setEvent(eventListView, eventList.get(position));
                     transaction.replace(R.id.results_event_fragment, eventFragment);
                     transaction.commit();
                 }
             });
         }
-    }
-
-    /**
-     * Grays out the listview and makes it inactive, so that it looks like
-     * it has taken background to the event fragment
-     *
-     * @param freeze - true to put the ListView in the "backgorund", false
-     *                  to restore the ListView
-     */
-    private void freezeListView (Boolean freeze) {
-
-        int colorId = (freeze) ? R.color.white_fade : R.color.white;
-
-        // change color of listView items
-        for (int i = 0; i < eventListView.getChildCount(); i++) {
-
-            // only set background of the visible items
-            if (eventListView.getChildAt(i) != null) {
-                eventListView.getChildAt(i).setBackgroundColor(
-                        ContextCompat.getColor(getContext(), colorId));
-            }
-        }
-
-        eventListView.setBackgroundColor(
-                ContextCompat.getColor(getContext(), colorId));
-        eventListView.setEnabled(!freeze);
     }
 
     // AsyncTaskResult methods
