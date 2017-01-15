@@ -24,12 +24,12 @@ import java.util.List;
 
 public class EventDetailFragment extends Fragment {
 
-    private Boolean fragmentOpen = false;
-
     Context context;
     Event event;
     ListView eventListView;
     View eventView;
+
+    private Boolean fragmentOpen = false;
 
     public void setFragment(Context context, ListView eventListView, Event event) {
         this.context = context;
