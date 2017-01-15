@@ -70,16 +70,6 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
         // hide fragment until clicked
         fragmentView = findViewById(R.id.results_event_fragment);
         fragmentView.setVisibility(View.INVISIBLE);
-
-        // set the image of an 'x' to exit the fragmentView
-        ImageButton fragmentExit = (ImageButton) findViewById(R.id.event_fragment_exit);
-        fragmentExit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fragmentView.setVisibility(View.INVISIBLE);
-                freezeListView(false);
-            }
-        });
     }
 
     @Override
@@ -132,8 +122,6 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
             eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    fragmentView.setVisibility(View.VISIBLE);
-                    freezeListView(true);
 
                     FragmentManager manager = getSupportFragmentManager();
                     FragmentTransaction transaction = manager.beginTransaction();
@@ -143,7 +131,21 @@ public class SearchResultsActivity extends FragmentActivity implements AsyncTask
 
                     eventFragment = new EventDetailFragment();
                     eventFragment.setEvent(eventList.get(position));
-                    transaction.add(R.id.results_event_fragment, eventFragment);
+
+                    // set the image of an 'x' to exit the fragmentView
+                    ImageButton fragmentExit = (ImageButton) findViewById(R.id.event_fragment_exit);
+                    fragmentExit.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            fragmentView.setVisibility(View.INVISIBLE);
+                            freezeListView(false);
+                        }
+                    });
+
+                    // make view visible and disable the background
+                    fragmentView.setVisibility(View.VISIBLE);
+                    freezeListView(true);
+                    transaction.replace(R.id.results_event_fragment, eventFragment);
                     transaction.commit();
                 }
             });
