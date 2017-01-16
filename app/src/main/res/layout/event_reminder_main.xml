@@ -41,31 +41,16 @@
             android:background="@color/white"
             android:hint="@string/search_hint"/>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/search"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:background="@color/colorPrimaryDark"
-                android:text="@string/search"
-                android:textColor="@color/white"/>
+        <Button
+            android:id="@+id/search"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/colorPrimaryDark"
+            android:text="@string/search"
+            android:textColor="@color/white" />
 
-            <Button
-                android:id="@+id/saved_events"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:background="@color/colorAccent"
-                android:text="@string/saved" />
-
-        </LinearLayout>
     </LinearLayout>
 
     <!-- write your name into this view @ res/values/strings.xml

@@ -22,7 +22,6 @@ public class EventReminderMain extends AppCompatActivity implements AsyncTaskRes
 
     EditText searchBar;
     Button search;
-    Button savedEvents;
     TextView madeBy;
 
     @Override
@@ -33,32 +32,26 @@ public class EventReminderMain extends AppCompatActivity implements AsyncTaskRes
         searchBar = (EditText) findViewById(R.id.search_bar);
         search = (Button) findViewById(R.id.search);
         search.setOnClickListener(this);
-        savedEvents = (Button) findViewById(R.id.saved_events);
-        savedEvents.setOnClickListener(this);
         madeBy = (TextView) findViewById(R.id.made_by);
 
         String author = "Made by " + getResources().getString(R.string.author);
         madeBy.setText(author);
     }
 
-    // from OnClickListener
+    /**
+     * from OnClickListener, this will get called whenever a view is touched.
+     * However, it will only do something 'if' that view is the 'search' view
+     */
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()) {
-            case R.id.search:
-                String searchQuery = searchBar.getText().toString();
+        if (v.getId() == R.id.search) {
+            String searchQuery = searchBar.getText().toString();
 
-                if (!searchQuery.equals("")) {
-                    APIRequest request = new APIRequest(this, searchQuery);
-                    request.execute();
-                }
-                break;
-
-            case R.id.saved_events:
-                Intent intent = new Intent(this, SavedResultsActivity.class);
-                startActivity(intent);
-                break;
+            if (!searchQuery.equals("")) {
+                APIRequest request = new APIRequest(this, searchQuery);
+                request.execute();
+            }
         }
     }
 
