@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="fill"
@@ -22,14 +24,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:padding="5dp"
-            android:src="@drawable/red_x" />
+            android:src="@drawable/red_x"
+            tools:ignore="contentDescription"/>
 
         <TextView
             android:id="@+id/event_fragment_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:textColor="@color/black"
             android:textSize="28sp"/>
 
         <TextView
@@ -37,7 +39,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="4dp"
-            android:textColor="@color/black"
             android:textSize="14sp"/>
 
     </LinearLayout>
@@ -56,7 +57,6 @@
             android:layout_weight="1"
             android:padding="4dp"
             android:textAlignment="viewStart"
-            android:textColor="@color/black"
             android:textSize="12sp"/>
 
         <TextView
@@ -66,7 +66,6 @@
             android:layout_weight="1"
             android:padding="4dp"
             android:textAlignment="viewEnd"
-            android:textColor="@color/black"
             android:textSize="14sp" />
 
     </LinearLayout>
